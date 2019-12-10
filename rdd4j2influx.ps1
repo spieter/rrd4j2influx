@@ -7,9 +7,20 @@ function rrd4j2influx($itemname){
 if($itemname -eq $null){break}
 
 # openHAB server
+<#
 $openhabserver="openHab-server"
 $openhabport="8080"
 $serviceid="rrd4j"
+$ohAuth=$false
+#>
+
+# openHAB server (cloud)
+$openhabserver="home.myopenhab.org"
+$openhabport="80"
+$serviceid="rrd4j"
+$ohAuth=$true
+$ohUsername="myopenhab.org@user.nl"
+$ohPassword="StrongPassword"
 
 # InfluxDB server
 $influxserver="influxdb-server"
@@ -43,6 +54,9 @@ echo "8h:   $eighthoursago"
 #set baseurl
 $baseurl="http://$openhabserver`:$openhabport/rest/persistence/items/$itemname`?serviceId=$serviceid"
 $webclient = New-Object System.Net.WebClient
+if($ohAuth){
+    $webclient.Credentials = new-object System.Net.NetworkCredential("$ohUsername" ,"$ohPassword")
+}
 
 #download data and convert to objects
 Write-Host "Loading $Itemname from OH"
