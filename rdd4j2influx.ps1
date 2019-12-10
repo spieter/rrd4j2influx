@@ -2,6 +2,11 @@ $itemname=$null
 rrd4j2influx($itemname)
 
 
+if ($ExecutionContext.SessionState.LanguageMode -ne "FullLanguage"){
+    Write-Warning "Powershell languageMode $($ExecutionContext.SessionState.LanguageMode) is not supported"    
+    break;
+}
+
 function rrd4j2influx($itemname){
 
 if($itemname -eq $null){break}
