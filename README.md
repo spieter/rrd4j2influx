@@ -1,4 +1,4 @@
-*** Work in progress ***
+*** Not maintained anymore ***
 
 # Introduction rrd4j2influx
 Migrate openHAB persistance data from rrd4j service to influx db (Openhab 2.2)
